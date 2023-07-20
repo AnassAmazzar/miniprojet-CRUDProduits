@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <app-header-view></app-header-view>
+
+    <!-- content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Affichage Produits</h1>
+          <button class="btn btn-primary" routerLink="/ajouter">
+            Ajouter Produit
+          </button>
+          <br />
+          <br />
+          <div class="input-group">
+            <!-- <input
+              type="text"
+              [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Rechercher products"
+            /> -->
+            <!-- <input
+              type="submit"
+              type="submit"
+              class="btn btn-outline-primary"
+              value="search"
+            /> -->
+            <button type="submit" class="btn btn-outline-primary">
+              search
+            </button>
+          </div>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+                <th scope="col">QTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let produit of produits">
+                <th scope="row">{{ produit.nom }}</th>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.quantite }}</td>
+                <td>
+                  <button
+                    class="btn btn-primary"
+                    routerLink="/produit/{{ produit.id }}"
+                  >
+                    Voir
+                  </button>
+                  <button
+                    class="btn btn-danger mx-2"
+                    routerLink="/modifier/{{ produit.id }}"
+                  >
+                    Modifier
+                  </button>
+                  <button
+                    class="btn btn-danger mx-2"
+                    (click)="deleteProduit(produit.id)"
+                  >
+                    Supprimer
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

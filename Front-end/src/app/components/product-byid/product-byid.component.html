@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voir un seul Produit</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <app-header-view></app-header-view>
+
+    <!-- content -->
+    <div class="container">
+      <div class="max-auto w-25" style="margin: auto">
+        <h2 class="text-center mb-3">Voir un seul Produit</h2>
+        <div class="row">
+          <div class="col-md-12 form-group mb-3">
+            <label for="name" class="form-label">{{ produit?.nom }}</label>
+          </div>
+        </div>
+        <!-- Prix -->
+        <div class="row">
+          <div class="col-md-12 form-group mb-3">
+            <label for="email" class="form-label">{{ produit?.prix }}</label>
+          </div>
+        </div>
+        <!-- Quantite -->
+        <div class="row">
+          <div class="col-md-12 form-group mb-3">
+            <label for="email" class="form-label">{{
+              produit?.quantite
+            }}</label>
+          </div>
+        </div>
+        <!-- button -->
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <button
+            class="btn btn-primary w-100"
+            routerLink="/">Retour</button>
+            <!-- <input type="submit" value="Retour" class="btn btn-primary w-100" /> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
