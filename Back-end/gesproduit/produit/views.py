@@ -4,6 +4,8 @@ from .models import Produit
 from .serializer import ProduitSerializer
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views.decorators.http import require_GET
+from rest_framework.views import APIView
+from django.db.models import Q
 # Create your views here.
 
 # -1
@@ -23,10 +25,14 @@ class ProduitList(generics.ListCreateAPIView):
 
 # -3 chercher
 
-@require_GET
-def search_products(request):
-    query = request.GET.get('query', '')
-    products = Product.objects.filter(name__icontains=query)
-    serialized_products = [
-        {'id': p.id, 'name': p.name, 'price': p.price} for p in products]
-    return JsonResponse(serialized_products, safe=False)
+def search_product(request):
+    # print("terme : ", request.GET['q'])
+    if 'q' in request.GET:
+        nom = request.GET['q']
+        print("terme : ", request.GET['q'])
+        produit = Produit.objects.filter(Q(nom__icontains=nom))
+        data = [{'nom': prod.nom, 'prix': prod.prix,
+                 'quantite': prod.quantite} for prod in produit]
+        return JsonResponse(data, safe=False)
+    else:
+        return JsonResponse([], safe=False)

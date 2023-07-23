@@ -1,6 +1,6 @@
 import { Produit } from './../../Interface/Produit';
 import { Component } from '@angular/core';
-// import Produit  from 'src/app/Interface/Produit';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProduitsService } from 'src/app/service/produits.service';
 
 @Component({
@@ -10,10 +10,14 @@ import { ProduitsService } from 'src/app/service/produits.service';
 })
 export class ViewProductComponent {
   produits : Produit[] | undefined;
-  products: any[] = [];
-  searchQuery: string='';
-  filteredProducts: any[] = [];
+  products: Produit[] | undefined;
+  dataproduit: any
+
+
   constructor(private produitsService:ProduitsService){}
+  form = new FormGroup({
+    nom: new FormControl('', Validators.required),
+  })
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -22,16 +26,6 @@ export class ViewProductComponent {
       this.produits = data
       console.log(data)
     })
-
-    this.produitsService.getProduct(this.searchQuery).subscribe(
-      (data: any[]) => {
-        this.produits = data;
-        // this.filteredProducts = data;
-      },
-      (error) => {
-        console.error('Error fetching products:', error);
-      }
-    );
   }
 
   deleteProduit(id:number){
@@ -41,9 +35,12 @@ export class ViewProductComponent {
     })
   }
 
-  onSearch() {
-    this.filteredProducts = this.products.filter(product => {
-      return product.nom.toLowerCase().includes(this.searchQuery.toLowerCase());
+  searchProducts() {
+    this.dataproduit = this.form.value
+    console.log(this.dataproduit.nom);
+    this.produitsService.searchProducts(this.dataproduit.nom).subscribe(data => {
+      this.produits = data;
+      // console.log(this.products);
     });
   }
 

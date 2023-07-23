@@ -21,19 +21,20 @@
           <br />
           <br />
           <div class="input-group">
-            <!-- <input
-              type="text"
-              [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Rechercher products"
-            /> -->
+            <form [formGroup]="form" (ngSubmit)="searchProducts()">
+              <input
+              type="text" name="nom" id="nom" formControlName="nom" placeholder="Rechercher produit"
+            />
             <!-- <input
               type="submit"
               type="submit"
               class="btn btn-outline-primary"
               value="search"
             /> -->
-            <button type="submit" class="btn btn-outline-primary">
-              search
+            <button type="submit" class="btn btn-outline-primary" style="margin-left: 10px;">
+              chercher
             </button>
+            </form>
           </div>
 
           <table class="table table-striped">

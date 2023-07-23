@@ -36,7 +36,10 @@ export class ProduitsService {
   }
 
   // checher-Produit
-  getProduct(query:string): Observable<Produit[]> {
-    return this.http.get<Produit[]>(`${this.url}search/?query=${query}`);
+  // searchProducts(query:string): Observable<Produit[]> {
+  //   return this.http.get<Produit[]>(`${this.url}search/${query}`);
+  // }
+  searchProducts(searchTerm: string): Observable<Produit[]> {
+    return this.http.get<Produit[]>(`${this.url}search/?q=${searchTerm}`);
   }
 }
